@@ -34,7 +34,6 @@ class ScheduleEventDB(Base):
         String(20), default="fixed"
     )
 
-
 class ScheduleProposalDB(Base):
     __tablename__ = "schedule_proposals"
 
@@ -65,6 +64,11 @@ class ScheduleProposalDB(Base):
         back_populates="proposal",
         cascade="all, delete-orphan",
         order_by="ProposalOptionDB.id",
+    )
+    
+    expires_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True),
+        nullable=True,
     )
 
 

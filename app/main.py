@@ -297,6 +297,23 @@ def create_app(
         )
 
         status = result["status"]
+        
+        if result["status"] == "already_processed":
+            raise HTTPException(
+                status_code=409,
+                detail={
+                    "status": "already_processed",
+                },
+            )
+        
+        if result["status"] == "invalid_transition":
+            raise HTTPException(
+                status_code=409,
+                detail={
+                    "status": "invalid_transition",
+                    "proposal_status": result["proposal_status"],
+                },
+            )
 
         if status == "not_found":
             raise HTTPException(
@@ -320,6 +337,31 @@ def create_app(
             )
 
         return result
+    
+    @app.post("/proposals/{proposal_id}/reject")
+    def reject_proposal(proposal_id: int):
+        result = approval_service.reject(proposal_id)
+
+        if result["status"] == "not_found":
+            raise HTTPException(
+                status_code=404,
+                detail={
+                    "status": "not_found",
+                    "proposal_id": proposal_id,
+                },
+            )
+
+        if result["status"] == "invalid_transition":
+            raise HTTPException(
+                status_code=409,
+                detail={
+                    "status": "invalid_transition",
+                    "proposal_status": result["proposal_status"],
+                },
+            )
+
+        return result
+
 
     return app
 

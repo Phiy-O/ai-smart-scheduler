@@ -1,5 +1,5 @@
 
-from datetime import date
+from datetime import date, datetime, timezone
 
 from sqlalchemy import select, text
 
@@ -8,6 +8,15 @@ from models import (
     ScheduleEventDB,
     ScheduleProposalDB,
     ProposalOptionDB,
+)
+
+from proposal_lifecycle import (
+    ProposalStatus,
+    InvalidProposalTransition,
+    effective_status,
+    get_expiration,
+    require_pending,
+    utc_now,
 )
 
 from scheduling_engine import (
@@ -53,7 +62,21 @@ class ApprovalService:
         if self._preferences_provider is not None:
             return self._preferences_provider()
         return self._preferences
+    
+    @staticmethod
+    def _refresh_expiration(proposal, now=None):
+        now = now or utc_now()
 
+        status = effective_status(
+            proposal.status,
+            proposal.expires_at,
+            now,
+        )
+
+        if status == ProposalStatus.EXPIRED:
+            proposal.status = ProposalStatus.EXPIRED.value
+
+        return status
 
     def save_proposal(self, instruction, ai_result):
         if ai_result.get("status") != "pending_approval":
@@ -76,7 +99,8 @@ class ApprovalService:
         proposed_date = date.fromisoformat(
             suggestions[0]["date"]
         )
-
+        
+        created_at = utc_now()
         proposal = ScheduleProposalDB(
             title=title,
             event_date=proposed_date,
@@ -84,6 +108,8 @@ class ApprovalService:
             preferred_period=command.get("preferred_period"),
             original_instruction=instruction,
             status="pending",
+            created_at=created_at,
+            expires_at=get_expiration(created_at),
         )
 
         for item in suggestions:
@@ -132,31 +158,50 @@ class ApprovalService:
             session.execute(text("BEGIN IMMEDIATE"))
 
             try:
-                proposal = session.get(
-                    ScheduleProposalDB, proposal_id
-                )
+                proposal = session.get(ScheduleProposalDB, proposal_id)
 
                 if proposal is None:
                     session.rollback()
-                    return {"status": "not_found"}
-
-                if proposal.status != "pending":
-                    session.rollback()
                     return {
-                        "status": "already_processed",
-                        "proposal_status": proposal.status,
+                        "status": "not_found",
+                        "proposal_id": proposal_id,
                     }
 
-                option = session.scalar(
-                    select(ProposalOptionDB).where(
-                        ProposalOptionDB.id == option_id,
-                        ProposalOptionDB.proposal_id == proposal_id,
-                    )
-                )
+                current = self._refresh_expiration(proposal)
 
-                if option is None:
+                # Pertahankan perilaku lama untuk duplicate approval.
+                if current == ProposalStatus.APPROVED:
+                    session.commit()
+
+                    return {
+                        "status": "already_processed",
+                        "proposal_id": proposal_id,
+                    }
+
+                # Perilaku baru untuk rejected dan expired.
+                if current in (
+                    ProposalStatus.REJECTED,
+                    ProposalStatus.EXPIRED,
+                ):
+                    session.commit()
+
+                    return {
+                        "status": "invalid_transition",
+                        "proposal_id": proposal_id,
+                        "proposal_status": current.value,
+                    }
+
+                # BARU PERIKSA OPTION
+                option = session.get(ProposalOptionDB, option_id)
+
+                if option is None or option.proposal_id != proposal_id:
                     session.rollback()
-                    return {"status": "invalid_option"}
+                    return {
+                        "status": "invalid_option",
+                    }
+
+                # Lanjutkan logika approval lama:
+                # validasi konflik, create event, update proposal, commit.
 
                 # Load current committed schedule.
                 rows = session.scalars(
@@ -247,3 +292,71 @@ class ApprovalService:
             except Exception:
                 session.rollback()
                 raise
+    
+    def reject(self, proposal_id: int):
+        with self.Session() as session:
+            # SQLite: acquire the write lock before reading.
+            session.execute(text("BEGIN IMMEDIATE"))
+
+            proposal = session.get(
+                ScheduleProposalDB,
+                proposal_id,
+            )
+
+            if proposal is None:
+                session.rollback()
+                return {
+                    "status": "not_found",
+                    "proposal_id": proposal_id,
+                }
+
+            current = self._refresh_expiration(proposal)
+
+            if current != ProposalStatus.PENDING:
+                session.commit()
+                return {
+                    "status": "invalid_transition",
+                    "proposal_id": proposal_id,
+                    "proposal_status": current.value,
+                }
+
+            proposal.status = ProposalStatus.REJECTED.value
+            session.commit()
+
+            return {
+                "status": "rejected",
+                "proposal_id": proposal_id,
+            }
+
+    def get_lifecycle(self, proposal_id: int):
+        with self.Session() as session:
+            session.execute(text("BEGIN IMMEDIATE"))
+
+            proposal = session.get(
+                ScheduleProposalDB,
+                proposal_id,
+            )
+
+            if proposal is None:
+                session.rollback()
+                return None
+
+            status = self._refresh_expiration(proposal)
+
+            result = {
+                "proposal_id": proposal.id,
+                "status": status.value,
+                "created_at": (
+                    proposal.created_at.isoformat()
+                    if proposal.created_at else None
+                ),
+                "expires_at": (
+                    proposal.expires_at.isoformat()
+                    if proposal.expires_at else None
+                ),
+                "approved_option_id": proposal.approved_option_id,
+            }
+
+            session.commit()
+            return result
+
