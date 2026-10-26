@@ -1,0 +1,818 @@
+{
+  "model": "qwen3:1.7b",
+  "thinking": false,
+  "results": [
+    {
+      "id": "TC-01",
+      "mode": "zero_shot",
+      "valid_schema": true,
+      "exact_match": true,
+      "fields": {
+        "action": true,
+        "title": true,
+        "duration_minutes": true,
+        "preferred_period": true,
+        "avoid_period": true,
+        "date_reference": true
+      },
+      "expected": {
+        "action": "create",
+        "title": "Belajar Python",
+        "duration_minutes": 120,
+        "preferred_period": [
+          "morning",
+          "afternoon"
+        ],
+        "avoid_period": [
+          "evening"
+        ],
+        "date_reference": "tomorrow"
+      },
+      "actual": {
+        "action": "create",
+        "title": "Belajar Python",
+        "duration_minutes": 120,
+        "preferred_period": [
+          "morning",
+          "afternoon"
+        ],
+        "avoid_period": [
+          "evening"
+        ],
+        "date_reference": "tomorrow"
+      },
+      "total_seconds": 12.73,
+      "load_seconds": 11.163,
+      "generated_tokens": 63,
+      "prompt_tokens": 202
+    },
+    {
+      "id": "TC-02",
+      "mode": "zero_shot",
+      "valid_schema": true,
+      "exact_match": false,
+      "fields": {
+        "action": true,
+        "title": true,
+        "duration_minutes": true,
+        "preferred_period": true,
+        "avoid_period": false,
+        "date_reference": true
+      },
+      "expected": {
+        "action": "create",
+        "title": "Olahraga",
+        "duration_minutes": 30,
+        "preferred_period": [
+          "afternoon"
+        ],
+        "avoid_period": [],
+        "date_reference": "tomorrow"
+      },
+      "actual": {
+        "action": "create",
+        "title": "Jadwal Olahraga",
+        "duration_minutes": 30,
+        "preferred_period": [
+          "afternoon"
+        ],
+        "avoid_period": [
+          "evening"
+        ],
+        "date_reference": "tomorrow"
+      },
+      "total_seconds": 1.135,
+      "load_seconds": 0.014,
+      "generated_tokens": 64,
+      "prompt_tokens": 194
+    },
+    {
+      "id": "TC-03",
+      "mode": "zero_shot",
+      "valid_schema": true,
+      "exact_match": false,
+      "fields": {
+        "action": true,
+        "title": true,
+        "duration_minutes": true,
+        "preferred_period": true,
+        "avoid_period": false,
+        "date_reference": true
+      },
+      "expected": {
+        "action": "create",
+        "title": "Membaca buku",
+        "duration_minutes": 60,
+        "preferred_period": [
+          "morning"
+        ],
+        "avoid_period": [],
+        "date_reference": "today"
+      },
+      "actual": {
+        "action": "create",
+        "title": "Membaca Buku",
+        "duration_minutes": 60,
+        "preferred_period": [
+          "morning"
+        ],
+        "avoid_period": [
+          "evening"
+        ],
+        "date_reference": "today"
+      },
+      "total_seconds": 1.34,
+      "load_seconds": 0.009,
+      "generated_tokens": 71,
+      "prompt_tokens": 192
+    },
+    {
+      "id": "TC-04",
+      "mode": "zero_shot",
+      "valid_schema": true,
+      "exact_match": false,
+      "fields": {
+        "action": true,
+        "title": true,
+        "duration_minutes": true,
+        "preferred_period": true,
+        "avoid_period": true,
+        "date_reference": false
+      },
+      "expected": {
+        "action": "create",
+        "title": "Belajar matematika",
+        "duration_minutes": 90,
+        "preferred_period": [
+          "evening"
+        ],
+        "avoid_period": [],
+        "date_reference": "tomorrow"
+      },
+      "actual": {
+        "action": "create",
+        "title": "Belajar Matematika",
+        "duration_minutes": 90,
+        "preferred_period": [
+          "evening"
+        ],
+        "avoid_period": [],
+        "date_reference": null
+      },
+      "total_seconds": 1.039,
+      "load_seconds": 0.005,
+      "generated_tokens": 58,
+      "prompt_tokens": 193
+    },
+    {
+      "id": "TC-05",
+      "mode": "zero_shot",
+      "valid_schema": true,
+      "exact_match": false,
+      "fields": {
+        "action": true,
+        "title": true,
+        "duration_minutes": true,
+        "preferred_period": false,
+        "avoid_period": true,
+        "date_reference": true
+      },
+      "expected": {
+        "action": "create",
+        "title": "Membersihkan kamar",
+        "duration_minutes": 45,
+        "preferred_period": [],
+        "avoid_period": [],
+        "date_reference": null
+      },
+      "actual": {
+        "action": "create",
+        "title": "membersihkan kamar",
+        "duration_minutes": 45,
+        "preferred_period": [
+          "morning"
+        ],
+        "avoid_period": [],
+        "date_reference": null
+      },
+      "total_seconds": 1.045,
+      "load_seconds": 0.03,
+      "generated_tokens": 59,
+      "prompt_tokens": 195
+    },
+    {
+      "id": "TC-06",
+      "mode": "zero_shot",
+      "valid_schema": true,
+      "exact_match": false,
+      "fields": {
+        "action": true,
+        "title": false,
+        "duration_minutes": true,
+        "preferred_period": true,
+        "avoid_period": false,
+        "date_reference": true
+      },
+      "expected": {
+        "action": "create",
+        "title": "Mengerjakan laporan praktikum",
+        "duration_minutes": 180,
+        "preferred_period": [
+          "morning"
+        ],
+        "avoid_period": [],
+        "date_reference": "tomorrow"
+      },
+      "actual": {
+        "action": "create",
+        "title": "Laporan Praktikum",
+        "duration_minutes": 180,
+        "preferred_period": [
+          "morning"
+        ],
+        "avoid_period": [
+          "afternoon",
+          "evening",
+          "evening"
+        ],
+        "date_reference": "tomorrow"
+      },
+      "total_seconds": 1.15,
+      "load_seconds": 0.005,
+      "generated_tokens": 74,
+      "prompt_tokens": 194
+    },
+    {
+      "id": "TC-07",
+      "mode": "zero_shot",
+      "valid_schema": true,
+      "exact_match": false,
+      "fields": {
+        "action": true,
+        "title": true,
+        "duration_minutes": true,
+        "preferred_period": true,
+        "avoid_period": false,
+        "date_reference": false
+      },
+      "expected": {
+        "action": "create",
+        "title": "Mencuci pakaian",
+        "duration_minutes": 45,
+        "preferred_period": [
+          "evening"
+        ],
+        "avoid_period": [],
+        "date_reference": "today"
+      },
+      "actual": {
+        "action": "create",
+        "title": "Mencuci Pakaian",
+        "duration_minutes": 45,
+        "preferred_period": [
+          "evening"
+        ],
+        "avoid_period": [
+          "morning"
+        ],
+        "date_reference": null
+      },
+      "total_seconds": 0.961,
+      "load_seconds": 0.003,
+      "generated_tokens": 60,
+      "prompt_tokens": 196
+    },
+    {
+      "id": "TC-08",
+      "mode": "zero_shot",
+      "valid_schema": true,
+      "exact_match": true,
+      "fields": {
+        "action": true,
+        "title": true,
+        "duration_minutes": true,
+        "preferred_period": true,
+        "avoid_period": true,
+        "date_reference": true
+      },
+      "expected": {
+        "action": "create",
+        "title": "Latihan mengetik",
+        "duration_minutes": 30,
+        "preferred_period": [
+          "morning",
+          "afternoon"
+        ],
+        "avoid_period": [
+          "evening"
+        ],
+        "date_reference": "today"
+      },
+      "actual": {
+        "action": "create",
+        "title": "Latihan Mengetik",
+        "duration_minutes": 30,
+        "preferred_period": [
+          "morning",
+          "afternoon"
+        ],
+        "avoid_period": [
+          "evening"
+        ],
+        "date_reference": "today"
+      },
+      "total_seconds": 0.979,
+      "load_seconds": 0.003,
+      "generated_tokens": 63,
+      "prompt_tokens": 204
+    },
+    {
+      "id": "TC-09",
+      "mode": "zero_shot",
+      "valid_schema": true,
+      "exact_match": false,
+      "fields": {
+        "action": true,
+        "title": true,
+        "duration_minutes": false,
+        "preferred_period": false,
+        "avoid_period": false,
+        "date_reference": true
+      },
+      "expected": {
+        "action": "create",
+        "title": "Belajar database",
+        "duration_minutes": 90,
+        "preferred_period": [],
+        "avoid_period": [],
+        "date_reference": "tomorrow"
+      },
+      "actual": {
+        "action": "create",
+        "title": "Belajar Database",
+        "duration_minutes": 30,
+        "preferred_period": [
+          "afternoon"
+        ],
+        "avoid_period": [
+          "evening"
+        ],
+        "date_reference": "tomorrow"
+      },
+      "total_seconds": 0.871,
+      "load_seconds": 0.003,
+      "generated_tokens": 60,
+      "prompt_tokens": 194
+    },
+    {
+      "id": "TC-10",
+      "mode": "zero_shot",
+      "valid_schema": true,
+      "exact_match": false,
+      "fields": {
+        "action": true,
+        "title": false,
+        "duration_minutes": false,
+        "preferred_period": false,
+        "avoid_period": false,
+        "date_reference": true
+      },
+      "expected": {
+        "action": "create",
+        "title": "Menyusun catatan kuliah",
+        "duration_minutes": 25,
+        "preferred_period": [],
+        "avoid_period": [],
+        "date_reference": null
+      },
+      "actual": {
+        "action": "create",
+        "title": "Catatan Kuliah",
+        "duration_minutes": null,
+        "preferred_period": [
+          "morning"
+        ],
+        "avoid_period": [
+          "evening"
+        ],
+        "date_reference": null
+      },
+      "total_seconds": 1.061,
+      "load_seconds": 0.008,
+      "generated_tokens": 63,
+      "prompt_tokens": 193
+    },
+    {
+      "id": "TC-01",
+      "mode": "few_shot",
+      "valid_schema": true,
+      "exact_match": true,
+      "fields": {
+        "action": true,
+        "title": true,
+        "duration_minutes": true,
+        "preferred_period": true,
+        "avoid_period": true,
+        "date_reference": true
+      },
+      "expected": {
+        "action": "create",
+        "title": "Belajar Python",
+        "duration_minutes": 120,
+        "preferred_period": [
+          "morning",
+          "afternoon"
+        ],
+        "avoid_period": [
+          "evening"
+        ],
+        "date_reference": "tomorrow"
+      },
+      "actual": {
+        "action": "create",
+        "title": "Belajar Python",
+        "duration_minutes": 120,
+        "preferred_period": [
+          "morning",
+          "afternoon"
+        ],
+        "avoid_period": [
+          "evening"
+        ],
+        "date_reference": "tomorrow"
+      },
+      "total_seconds": 0.608,
+      "load_seconds": 0.007,
+      "generated_tokens": 52,
+      "prompt_tokens": 421
+    },
+    {
+      "id": "TC-02",
+      "mode": "few_shot",
+      "valid_schema": true,
+      "exact_match": true,
+      "fields": {
+        "action": true,
+        "title": true,
+        "duration_minutes": true,
+        "preferred_period": true,
+        "avoid_period": true,
+        "date_reference": true
+      },
+      "expected": {
+        "action": "create",
+        "title": "Olahraga",
+        "duration_minutes": 30,
+        "preferred_period": [
+          "afternoon"
+        ],
+        "avoid_period": [],
+        "date_reference": "tomorrow"
+      },
+      "actual": {
+        "action": "create",
+        "title": "Olahraga",
+        "duration_minutes": 30,
+        "preferred_period": [
+          "afternoon"
+        ],
+        "avoid_period": [],
+        "date_reference": "tomorrow"
+      },
+      "total_seconds": 0.492,
+      "load_seconds": 0.004,
+      "generated_tokens": 45,
+      "prompt_tokens": 413
+    },
+    {
+      "id": "TC-03",
+      "mode": "few_shot",
+      "valid_schema": true,
+      "exact_match": true,
+      "fields": {
+        "action": true,
+        "title": true,
+        "duration_minutes": true,
+        "preferred_period": true,
+        "avoid_period": true,
+        "date_reference": true
+      },
+      "expected": {
+        "action": "create",
+        "title": "Membaca buku",
+        "duration_minutes": 60,
+        "preferred_period": [
+          "morning"
+        ],
+        "avoid_period": [],
+        "date_reference": "today"
+      },
+      "actual": {
+        "action": "create",
+        "title": "Membaca buku",
+        "duration_minutes": 60,
+        "preferred_period": [
+          "morning"
+        ],
+        "avoid_period": [],
+        "date_reference": "today"
+      },
+      "total_seconds": 0.482,
+      "load_seconds": 0.003,
+      "generated_tokens": 45,
+      "prompt_tokens": 411
+    },
+    {
+      "id": "TC-04",
+      "mode": "few_shot",
+      "valid_schema": true,
+      "exact_match": true,
+      "fields": {
+        "action": true,
+        "title": true,
+        "duration_minutes": true,
+        "preferred_period": true,
+        "avoid_period": true,
+        "date_reference": true
+      },
+      "expected": {
+        "action": "create",
+        "title": "Belajar matematika",
+        "duration_minutes": 90,
+        "preferred_period": [
+          "evening"
+        ],
+        "avoid_period": [],
+        "date_reference": "tomorrow"
+      },
+      "actual": {
+        "action": "create",
+        "title": "Belajar matematika",
+        "duration_minutes": 90,
+        "preferred_period": [
+          "evening"
+        ],
+        "avoid_period": [],
+        "date_reference": "tomorrow"
+      },
+      "total_seconds": 0.498,
+      "load_seconds": 0.005,
+      "generated_tokens": 46,
+      "prompt_tokens": 412
+    },
+    {
+      "id": "TC-05",
+      "mode": "few_shot",
+      "valid_schema": true,
+      "exact_match": false,
+      "fields": {
+        "action": true,
+        "title": true,
+        "duration_minutes": true,
+        "preferred_period": true,
+        "avoid_period": true,
+        "date_reference": false
+      },
+      "expected": {
+        "action": "create",
+        "title": "Membersihkan kamar",
+        "duration_minutes": 45,
+        "preferred_period": [],
+        "avoid_period": [],
+        "date_reference": null
+      },
+      "actual": {
+        "action": "create",
+        "title": "Membersihkan kamar",
+        "duration_minutes": 45,
+        "preferred_period": [],
+        "avoid_period": [],
+        "date_reference": "today"
+      },
+      "total_seconds": 0.453,
+      "load_seconds": 0.004,
+      "generated_tokens": 42,
+      "prompt_tokens": 414
+    },
+    {
+      "id": "TC-06",
+      "mode": "few_shot",
+      "valid_schema": true,
+      "exact_match": false,
+      "fields": {
+        "action": true,
+        "title": true,
+        "duration_minutes": false,
+        "preferred_period": true,
+        "avoid_period": true,
+        "date_reference": true
+      },
+      "expected": {
+        "action": "create",
+        "title": "Mengerjakan laporan praktikum",
+        "duration_minutes": 180,
+        "preferred_period": [
+          "morning"
+        ],
+        "avoid_period": [],
+        "date_reference": "tomorrow"
+      },
+      "actual": {
+        "action": "create",
+        "title": "Mengerjakan laporan praktikum",
+        "duration_minutes": 3,
+        "preferred_period": [
+          "morning"
+        ],
+        "avoid_period": [],
+        "date_reference": "tomorrow"
+      },
+      "total_seconds": 0.539,
+      "load_seconds": 0.007,
+      "generated_tokens": 49,
+      "prompt_tokens": 413
+    },
+    {
+      "id": "TC-07",
+      "mode": "few_shot",
+      "valid_schema": true,
+      "exact_match": false,
+      "fields": {
+        "action": true,
+        "title": true,
+        "duration_minutes": true,
+        "preferred_period": true,
+        "avoid_period": true,
+        "date_reference": false
+      },
+      "expected": {
+        "action": "create",
+        "title": "Mencuci pakaian",
+        "duration_minutes": 45,
+        "preferred_period": [
+          "evening"
+        ],
+        "avoid_period": [],
+        "date_reference": "today"
+      },
+      "actual": {
+        "action": "create",
+        "title": "Mencuci pakaian",
+        "duration_minutes": 45,
+        "preferred_period": [
+          "evening"
+        ],
+        "avoid_period": [],
+        "date_reference": "tomorrow"
+      },
+      "total_seconds": 0.526,
+      "load_seconds": 0.005,
+      "generated_tokens": 47,
+      "prompt_tokens": 415
+    },
+    {
+      "id": "TC-08",
+      "mode": "few_shot",
+      "valid_schema": true,
+      "exact_match": true,
+      "fields": {
+        "action": true,
+        "title": true,
+        "duration_minutes": true,
+        "preferred_period": true,
+        "avoid_period": true,
+        "date_reference": true
+      },
+      "expected": {
+        "action": "create",
+        "title": "Latihan mengetik",
+        "duration_minutes": 30,
+        "preferred_period": [
+          "morning",
+          "afternoon"
+        ],
+        "avoid_period": [
+          "evening"
+        ],
+        "date_reference": "today"
+      },
+      "actual": {
+        "action": "create",
+        "title": "Latihan mengetik",
+        "duration_minutes": 30,
+        "preferred_period": [
+          "morning",
+          "afternoon"
+        ],
+        "avoid_period": [
+          "evening"
+        ],
+        "date_reference": "today"
+      },
+      "total_seconds": 0.626,
+      "load_seconds": 0.006,
+      "generated_tokens": 52,
+      "prompt_tokens": 423
+    },
+    {
+      "id": "TC-09",
+      "mode": "few_shot",
+      "valid_schema": true,
+      "exact_match": false,
+      "fields": {
+        "action": true,
+        "title": true,
+        "duration_minutes": true,
+        "preferred_period": false,
+        "avoid_period": true,
+        "date_reference": true
+      },
+      "expected": {
+        "action": "create",
+        "title": "Belajar database",
+        "duration_minutes": 90,
+        "preferred_period": [],
+        "avoid_period": [],
+        "date_reference": "tomorrow"
+      },
+      "actual": {
+        "action": "create",
+        "title": "Belajar database",
+        "duration_minutes": 90,
+        "preferred_period": [
+          "evening"
+        ],
+        "avoid_period": [],
+        "date_reference": "tomorrow"
+      },
+      "total_seconds": 0.543,
+      "load_seconds": 0.005,
+      "generated_tokens": 44,
+      "prompt_tokens": 413
+    },
+    {
+      "id": "TC-10",
+      "mode": "few_shot",
+      "valid_schema": true,
+      "exact_match": false,
+      "fields": {
+        "action": true,
+        "title": true,
+        "duration_minutes": true,
+        "preferred_period": true,
+        "avoid_period": true,
+        "date_reference": false
+      },
+      "expected": {
+        "action": "create",
+        "title": "Menyusun catatan kuliah",
+        "duration_minutes": 25,
+        "preferred_period": [],
+        "avoid_period": [],
+        "date_reference": null
+      },
+      "actual": {
+        "action": "create",
+        "title": "Menyusun catatan kuliah",
+        "duration_minutes": 25,
+        "preferred_period": [],
+        "avoid_period": [],
+        "date_reference": "today"
+      },
+      "total_seconds": 0.477,
+      "load_seconds": 0.009,
+      "generated_tokens": 45,
+      "prompt_tokens": 412
+    }
+  ],
+  "summaries": [
+    {
+      "mode": "zero_shot",
+      "cases": 10,
+      "schema_valid": 10,
+      "exact_matches": 2,
+      "field_accuracy": {
+        "action": 1.0,
+        "title": 0.8,
+        "duration_minutes": 0.8,
+        "preferred_period": 0.7,
+        "avoid_period": 0.4,
+        "date_reference": 0.8
+      }
+    },
+    {
+      "mode": "few_shot",
+      "cases": 10,
+      "schema_valid": 10,
+      "exact_matches": 5,
+      "field_accuracy": {
+        "action": 1.0,
+        "title": 1.0,
+        "duration_minutes": 0.9,
+        "preferred_period": 0.9,
+        "avoid_period": 1.0,
+        "date_reference": 0.7
+      }
+    }
+  ]
+}

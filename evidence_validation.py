@@ -2,7 +2,7 @@
 import re
 from dataclasses import dataclass, field
 
-from experiments.archives.schedule_commands import ScheduleCommand
+from schedule_commands import ScheduleCommand
 
 
 PERIOD_TERMS = {

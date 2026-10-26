@@ -2,7 +2,7 @@
 import json
 from pathlib import Path
 
-from experiments.archives.schedule_commands import (
+from schedule_commands import (
     CommandParser,
     IntentResult,
     COMMAND_MODELS,

@@ -12,10 +12,9 @@ NEXT_DATE = "2030-05-11"
 
 
 @pytest.fixture
-def client(tmp_path):
-    path = tmp_path / "crud_test.db"
+def client(migrated_database):
     app = create_app(
-        database_url=f"sqlite:///{path.as_posix()}",
+        database_url=migrated_database,
     )
 
     with TestClient(app) as test_client:

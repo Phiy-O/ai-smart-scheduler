@@ -12,11 +12,15 @@ from approval_service import ApprovalService
 from ai_scheduler import AIScheduler
 from models import ScheduleProposalDB
 
+from dataclasses import asdict
+from preferences_repository import PreferencesRepository
+
 from app.schemas import (
     ScheduleCreate,
     ScheduleUpdate,
     AIInstruction,
     ApprovalRequest,
+    PreferencesPayload
 )
 
 from schedule_policy import (
@@ -56,12 +60,19 @@ def create_app(
         "sqlite:///scheduler.db",
     )
 
+
     engine = make_engine(db_url)
-    repository = ScheduleRepository(engine)
+
+    preferences_repository = PreferencesRepository(engine)
+
+    repository = ScheduleRepository(
+        engine,
+        preferences_provider=preferences_repository.get,
+    )
 
     approval_service = ApprovalService(
         engine,
-        preferences=repository.preferences,
+        preferences_provider=preferences_repository.get,
     )
 
     ai_scheduler = AIScheduler(
@@ -71,7 +82,6 @@ def create_app(
 
     @asynccontextmanager
     async def lifespan(app: FastAPI):
-        init_database(engine)
         yield
         engine.dispose()
 
@@ -83,6 +93,7 @@ def create_app(
     )
 
     # Application-scoped services.
+    app.state.preferences_repository = preferences_repository
     app.state.repository = repository
     app.state.approval_service = approval_service
     app.state.ai_scheduler = ai_scheduler
@@ -161,8 +172,17 @@ def create_app(
             **result,
             "proposal_id": saved["proposal_id"],
             "options": saved["options"],
-        }
-        
+        } 
+    
+    @app.get("/preferences")
+    def get_preferences():
+        prefs = preferences_repository.get()
+        return asdict(prefs)
+
+    @app.put("/preferences")
+    def update_preferences(payload: PreferencesPayload):
+        prefs = preferences_repository.save(payload)
+        return asdict(prefs)
     
     @app.get("/schedules/{event_id}")
     def get_schedule(event_id: int):

@@ -1,5 +1,6 @@
 
 from datetime import date, datetime, timezone
+from sqlalchemy import JSON
 
 from sqlalchemy import (
     Date,
@@ -85,4 +86,32 @@ class ProposalOptionDB(Base):
 
     proposal: Mapped[ScheduleProposalDB] = relationship(
         back_populates="options"
+    )
+
+class UserPreferencesDB(Base):
+    __tablename__ = "user_preferences"
+
+    id: Mapped[int] = mapped_column(
+        Integer, primary_key=True
+    )
+
+    day_start: Mapped[str] = mapped_column(
+        String(5), nullable=False
+    )
+    day_end: Mapped[str] = mapped_column(
+        String(5), nullable=False
+    )
+
+    productive_periods: Mapped[list] = mapped_column(
+        JSON, nullable=False
+    )
+    avoid_periods: Mapped[list] = mapped_column(
+        JSON, nullable=False
+    )
+
+    min_break_minutes: Mapped[int] = mapped_column(
+        Integer, nullable=False
+    )
+    max_focus_minutes: Mapped[int] = mapped_column(
+        Integer, nullable=False
     )

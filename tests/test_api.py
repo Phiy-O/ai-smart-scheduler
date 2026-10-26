@@ -5,7 +5,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app.main import create_app
-from experiments.archives.schedule_commands import (
+from schedule_commands import (
     CreateCommand,
     ClarifyCommand,
 )
@@ -31,13 +31,9 @@ class FakeParser:
 
 
 @pytest.fixture
-def client(tmp_path):
-    database_path = tmp_path / "api_test.db"
-
+def client(migrated_database):
     app = create_app(
-        database_url=(
-            f"sqlite:///{database_path.as_posix()}"
-        ),
+        database_url=migrated_database,
         parser=FakeParser(),
     )
 

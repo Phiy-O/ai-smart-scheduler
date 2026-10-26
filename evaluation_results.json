@@ -1,0 +1,249 @@
+[
+  {
+    "id": "TC-01",
+    "thinking": false,
+    "valid_schema": true,
+    "exact_match": false,
+    "field_results": {
+      "action": true,
+      "title": true,
+      "duration_minutes": true,
+      "preferred_period": false,
+      "avoid_period": true,
+      "date_reference": true
+    },
+    "actual": {
+      "action": "create",
+      "title": "Belajar Python",
+      "duration_minutes": 120,
+      "preferred_period": [
+        "afternoon"
+      ],
+      "avoid_period": [
+        "evening"
+      ],
+      "date_reference": "tomorrow"
+    },
+    "latency_seconds": 22.736
+  },
+  {
+    "id": "TC-02",
+    "thinking": false,
+    "valid_schema": true,
+    "exact_match": false,
+    "field_results": {
+      "action": true,
+      "title": false,
+      "duration_minutes": true,
+      "preferred_period": true,
+      "avoid_period": true,
+      "date_reference": true
+    },
+    "actual": {
+      "action": "create",
+      "title": "Jadwal Olahraga",
+      "duration_minutes": 30,
+      "preferred_period": [
+        "afternoon"
+      ],
+      "avoid_period": [],
+      "date_reference": "tomorrow"
+    },
+    "latency_seconds": 1.5
+  },
+  {
+    "id": "TC-03",
+    "thinking": false,
+    "valid_schema": true,
+    "exact_match": true,
+    "field_results": {
+      "action": true,
+      "title": true,
+      "duration_minutes": true,
+      "preferred_period": true,
+      "avoid_period": true,
+      "date_reference": true
+    },
+    "actual": {
+      "action": "create",
+      "title": "Membaca Buku",
+      "duration_minutes": 60,
+      "preferred_period": [
+        "morning"
+      ],
+      "avoid_period": [],
+      "date_reference": "today"
+    },
+    "latency_seconds": 0.952
+  },
+  {
+    "id": "TC-04",
+    "thinking": false,
+    "valid_schema": true,
+    "exact_match": true,
+    "field_results": {
+      "action": true,
+      "title": true,
+      "duration_minutes": true,
+      "preferred_period": true,
+      "avoid_period": true,
+      "date_reference": true
+    },
+    "actual": {
+      "action": "create",
+      "title": "belajar matematika",
+      "duration_minutes": 90,
+      "preferred_period": [
+        "evening"
+      ],
+      "avoid_period": [],
+      "date_reference": "tomorrow"
+    },
+    "latency_seconds": 0.984
+  },
+  {
+    "id": "TC-05",
+    "thinking": false,
+    "valid_schema": true,
+    "exact_match": true,
+    "field_results": {
+      "action": true,
+      "title": true,
+      "duration_minutes": true,
+      "preferred_period": true,
+      "avoid_period": true,
+      "date_reference": true
+    },
+    "actual": {
+      "action": "create",
+      "title": "membersihkan kamar",
+      "duration_minutes": 45,
+      "preferred_period": [],
+      "avoid_period": [],
+      "date_reference": null
+    },
+    "latency_seconds": 0.926
+  },
+  {
+    "id": "TC-01",
+    "thinking": true,
+    "valid_schema": true,
+    "exact_match": true,
+    "field_results": {
+      "action": true,
+      "title": true,
+      "duration_minutes": true,
+      "preferred_period": true,
+      "avoid_period": true,
+      "date_reference": true
+    },
+    "actual": {
+      "action": "create",
+      "title": "Belajar Python",
+      "duration_minutes": 120,
+      "preferred_period": [
+        "morning",
+        "afternoon"
+      ],
+      "avoid_period": [
+        "evening"
+      ],
+      "date_reference": "tomorrow"
+    },
+    "latency_seconds": 10.521
+  },
+  {
+    "id": "TC-02",
+    "thinking": true,
+    "valid_schema": true,
+    "exact_match": false,
+    "field_results": {
+      "action": true,
+      "title": true,
+      "duration_minutes": true,
+      "preferred_period": false,
+      "avoid_period": true,
+      "date_reference": false
+    },
+    "actual": {
+      "action": "create",
+      "title": "Olahraga",
+      "duration_minutes": 30,
+      "preferred_period": [],
+      "avoid_period": [],
+      "date_reference": null
+    },
+    "latency_seconds": 4.057
+  },
+  {
+    "id": "TC-03",
+    "thinking": true,
+    "valid_schema": true,
+    "exact_match": false,
+    "field_results": {
+      "action": true,
+      "title": true,
+      "duration_minutes": true,
+      "preferred_period": true,
+      "avoid_period": true,
+      "date_reference": false
+    },
+    "actual": {
+      "action": "create",
+      "title": "Membaca Buku",
+      "duration_minutes": 60,
+      "preferred_period": [
+        "morning"
+      ],
+      "avoid_period": [],
+      "date_reference": null
+    },
+    "latency_seconds": 5.716
+  },
+  {
+    "id": "TC-04",
+    "thinking": true,
+    "valid_schema": true,
+    "exact_match": false,
+    "field_results": {
+      "action": true,
+      "title": true,
+      "duration_minutes": true,
+      "preferred_period": false,
+      "avoid_period": true,
+      "date_reference": true
+    },
+    "actual": {
+      "action": "create",
+      "title": "belajar matematika",
+      "duration_minutes": 90,
+      "preferred_period": [],
+      "avoid_period": [],
+      "date_reference": "tomorrow"
+    },
+    "latency_seconds": 2.928
+  },
+  {
+    "id": "TC-05",
+    "thinking": true,
+    "valid_schema": true,
+    "exact_match": true,
+    "field_results": {
+      "action": true,
+      "title": true,
+      "duration_minutes": true,
+      "preferred_period": true,
+      "avoid_period": true,
+      "date_reference": true
+    },
+    "actual": {
+      "action": "create",
+      "title": "Membersihkan kamar",
+      "duration_minutes": 45,
+      "preferred_period": [],
+      "avoid_period": [],
+      "date_reference": null
+    },
+    "latency_seconds": 3.129
+  }
+]

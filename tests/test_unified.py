@@ -7,7 +7,7 @@ from ai_scheduler import AIScheduler
 from approval_service import ApprovalService
 from database import make_engine, init_database
 from schedule_repository import ScheduleRepository
-from experiments.archives.schedule_commands import CreateCommand
+from schedule_commands import CreateCommand
 from scheduling_engine import to_minutes
 from schedule_policy import ScheduleConflictError
 

@@ -28,10 +28,16 @@ from target_resolution import ScheduleEvent
 
 
 class ApprovalService:
-    def __init__(self, engine, preferences=None):
+
+    def __init__(
+        self,
+        engine,
+        preferences=None,
+        preferences_provider=None,
+    ):
         self.engine = engine
         self.Session = make_session_factory(engine)
-        self.preferences = preferences or UserPreferences(
+        self._preferences = preferences or UserPreferences(
             day_start="08:00",
             day_end="20:00",
             productive_periods=["morning", "afternoon"],
@@ -39,7 +45,15 @@ class ApprovalService:
             min_break_minutes=15,
             max_focus_minutes=120,
         )
+        self._preferences_provider = preferences_provider
         self.scheduler = SchedulingEngine(self.preferences)
+
+    @property
+    def preferences(self):
+        if self._preferences_provider is not None:
+            return self._preferences_provider()
+        return self._preferences
+
 
     def save_proposal(self, instruction, ai_result):
         if ai_result.get("status") != "pending_approval":

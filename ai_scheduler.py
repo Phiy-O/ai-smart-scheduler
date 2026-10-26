@@ -1,7 +1,7 @@
 
 from datetime import date, timedelta
 
-from experiments.archives.schedule_commands import CommandParser
+from schedule_commands import CommandParser
 from evidence_validation import validate_evidence
 from schedule_repository import ScheduleRepository
 from scheduling_engine import (
@@ -90,7 +90,11 @@ class AIScheduler:
             target_date
         )
 
-        suggestions = self.engine.recommend(
+        current_preferences = self.repository.preferences
+
+        suggestions = SchedulingEngine(
+            current_preferences
+        ).recommend(
             request=request,
             events=existing_events,
             limit=3,

@@ -1,0 +1,132 @@
+
+==================================================
+TEST 1
+INPUT: Tambahkan belajar Python selama 2 jam besok pagi.
+
+PARSED COMMAND:
+{
+  "action": "create",
+  "task_name": "belajar Python",
+  "duration_minutes": 120,
+  "date_reference": "tomorrow",
+  "preferred_period": "morning",
+  "clarification_question": null
+}
+
+POLICY RESULT:
+{
+  "status": "pending_approval",
+  "message": "Proposal pembuatan aktivitas. Waktu final belum ditentukan.",
+  "proposal": {
+    "action": "create",
+    "task_name": "belajar Python",
+    "duration_minutes": 120,
+    "date_reference": "tomorrow",
+    "preferred_period": "morning",
+    "clarification_question": null
+  }
+}
+
+==================================================
+TEST 2
+INPUT: Ubah durasi belajar Python menjadi 90 menit.
+
+PARSED COMMAND:
+{
+  "action": "update",
+  "task_name": "belajar Python",
+  "duration_minutes": 90,
+  "date_reference": "today",
+  "preferred_period": "afternoon",
+  "clarification_question": null
+}
+
+POLICY RESULT:
+{
+  "status": "needs_target_resolution",
+  "message": "Cari aktivitas yang sesuai di database dan minta konfirmasi sebelum mengubahnya.",
+  "proposal": {
+    "action": "update",
+    "task_name": "belajar Python",
+    "duration_minutes": 90,
+    "date_reference": "today",
+    "preferred_period": "afternoon",
+    "clarification_question": null
+  }
+}
+
+==================================================
+TEST 3
+INPUT: Pindahkan jadwal olahraga besok ke sore hari.
+
+PARSED COMMAND:
+{
+  "action": "reschedule",
+  "task_name": "olahraga",
+  "duration_minutes": null,
+  "date_reference": "tomorrow",
+  "preferred_period": "evening",
+  "clarification_question": null
+}
+
+POLICY RESULT:
+{
+  "status": "needs_target_resolution",
+  "message": "Cari aktivitas yang sesuai di database dan minta konfirmasi sebelum mengubahnya.",
+  "proposal": {
+    "action": "reschedule",
+    "task_name": "olahraga",
+    "duration_minutes": null,
+    "date_reference": "tomorrow",
+    "preferred_period": "evening",
+    "clarification_question": null
+  }
+}
+
+==================================================
+TEST 4
+INPUT: Hapus jadwal meeting besok.
+
+PARSED COMMAND:
+{
+  "action": "delete",
+  "task_name": "meeting",
+  "duration_minutes": null,
+  "date_reference": "tomorrow",
+  "preferred_period": "afternoon",
+  "clarification_question": null
+}
+
+POLICY RESULT:
+{
+  "status": "needs_target_resolution",
+  "message": "Cari aktivitas yang sesuai di database dan minta konfirmasi sebelum mengubahnya.",
+  "proposal": {
+    "action": "delete",
+    "task_name": "meeting",
+    "duration_minutes": null,
+    "date_reference": "tomorrow",
+    "preferred_period": "afternoon",
+    "clarification_question": null
+  }
+}
+
+==================================================
+TEST 5
+INPUT: Tolong atur jadwalku.
+
+PARSED COMMAND:
+{
+  "action": "clarify",
+  "task_name": null,
+  "duration_minutes": null,
+  "date_reference": null,
+  "preferred_period": null,
+  "clarification_question": "Anda ingin mengatur jadwalku apa saja?"
+}
+
+POLICY RESULT:
+{
+  "status": "needs_clarification",
+  "question": "Anda ingin mengatur jadwalku apa saja?"
+}

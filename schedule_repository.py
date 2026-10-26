@@ -11,9 +11,15 @@ from schedule_policy import EventInput, validate_event
 
 
 class ScheduleRepository:
-    def __init__(self, engine, preferences=None):
+
+    def __init__(
+        self,
+        engine,
+        preferences=None,
+        preferences_provider=None,
+    ):
         self.Session = make_session_factory(engine)
-        self.preferences = preferences or UserPreferences(
+        self._preferences = preferences or UserPreferences(
             day_start="08:00",
             day_end="20:00",
             productive_periods=["morning", "afternoon"],
@@ -21,7 +27,17 @@ class ScheduleRepository:
             min_break_minutes=15,
             max_focus_minutes=120,
         )
+        self._preferences_provider = preferences_provider
+
+        # Dipertahankan untuk kompatibilitas kode lama.
         self.scheduler = SchedulingEngine(self.preferences)
+
+    @property
+    def preferences(self):
+        if self._preferences_provider is not None:
+            return self._preferences_provider()
+        return self._preferences
+
 
     @staticmethod
     def to_domain(row):
