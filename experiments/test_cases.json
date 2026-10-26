@@ -1,0 +1,142 @@
+[
+    {
+        "id": "TC-01",
+        "input": "Besok aku ingin belajar Python selama 2 jam, jangan malam karena aku lebih produktif pagi atau siang.",
+        "expected": {
+            "action": "create",
+            "title": "Belajar Python",
+            "duration_minutes": 120,
+            "preferred_period": [
+                "morning",
+                "afternoon"
+            ],
+            "avoid_period": [
+                "evening"
+            ],
+            "date_reference": "tomorrow"
+        }
+    },
+    {
+        "id": "TC-02",
+        "input": "Tambahkan jadwal olahraga selama 30 menit besok sore.",
+        "expected": {
+            "action": "create",
+            "title": "Olahraga",
+            "duration_minutes": 30,
+            "preferred_period": [
+                "afternoon"
+            ],
+            "avoid_period": [],
+            "date_reference": "tomorrow"
+        }
+    },
+    {
+        "id": "TC-03",
+        "input": "Hari ini aku mau membaca buku selama satu jam pada pagi hari.",
+        "expected": {
+            "action": "create",
+            "title": "Membaca buku",
+            "duration_minutes": 60,
+            "preferred_period": [
+                "morning"
+            ],
+            "avoid_period": [],
+            "date_reference": "today"
+        }
+    },
+    {
+        "id": "TC-04",
+        "input": "Besok malam aku ingin belajar matematika selama 90 menit.",
+        "expected": {
+            "action": "create",
+            "title": "Belajar matematika",
+            "duration_minutes": 90,
+            "preferred_period": [
+                "evening"
+            ],
+            "avoid_period": [],
+            "date_reference": "tomorrow"
+        }
+    },
+    {
+        "id": "TC-05",
+        "input": "Aku ingin menambahkan aktivitas membersihkan kamar selama 45 menit.",
+        "expected": {
+            "action": "create",
+            "title": "Membersihkan kamar",
+            "duration_minutes": 45,
+            "preferred_period": [],
+            "avoid_period": [],
+            "date_reference": null
+        }
+    },
+    {
+        "id": "TC-06",
+        "input": "Aku mau mengerjakan laporan praktikum 3 jam besok pagi.",
+        "expected": {
+            "action": "create",
+            "title": "Mengerjakan laporan praktikum",
+            "duration_minutes": 180,
+            "preferred_period": [
+                "morning"
+            ],
+            "avoid_period": [],
+            "date_reference": "tomorrow"
+        }
+    },
+    {
+        "id": "TC-07",
+        "input": "Tambahkan jadwal mencuci pakaian nanti malam selama 45 menit.",
+        "expected": {
+            "action": "create",
+            "title": "Mencuci pakaian",
+            "duration_minutes": 45,
+            "preferred_period": [
+                "evening"
+            ],
+            "avoid_period": [],
+            "date_reference": "today"
+        }
+    },
+    {
+        "id": "TC-08",
+        "input": "Hari ini aku ingin latihan mengetik selama setengah jam, pagi atau sore boleh, tapi jangan malam.",
+        "expected": {
+            "action": "create",
+            "title": "Latihan mengetik",
+            "duration_minutes": 30,
+            "preferred_period": [
+                "morning",
+                "afternoon"
+            ],
+            "avoid_period": [
+                "evening"
+            ],
+            "date_reference": "today"
+        }
+    },
+    {
+        "id": "TC-09",
+        "input": "Tolong jadwalkan belajar database besok selama satu setengah jam.",
+        "expected": {
+            "action": "create",
+            "title": "Belajar database",
+            "duration_minutes": 90,
+            "preferred_period": [],
+            "avoid_period": [],
+            "date_reference": "tomorrow"
+        }
+    },
+    {
+        "id": "TC-10",
+        "input": "Aku perlu menyusun catatan kuliah selama 25 menit.",
+        "expected": {
+            "action": "create",
+            "title": "Menyusun catatan kuliah",
+            "duration_minutes": 25,
+            "preferred_period": [],
+            "avoid_period": [],
+            "date_reference": null
+        }
+    }
+]
