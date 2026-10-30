@@ -1,0 +1,26 @@
+
+{"id":"I001","instruction":"Tambahkan jadwal belajar Python besok pagi selama 90 menit","expected_action":"create","category":"explicit"}
+{"id":"I002","instruction":"Besok aku mau belajar algoritma satu jam pada sore hari","expected_action":"create","category":"conversational"}
+{"id":"I003","instruction":"Jadwalkan meeting proyek besok selama 60 menit","expected_action":"create","category":"explicit"}
+{"id":"I004","instruction":"Aku ingin olahraga pagi ini selama 30 menit","expected_action":"create","category":"conversational"}
+{"id":"I005","instruction":"Buat jadwal membaca buku nanti sore selama 45 menit","expected_action":"create","category":"relative_time"}
+{"id":"I006","instruction":"Hapus jadwal belajar Python besok","expected_action":"delete","category":"explicit"}
+{"id":"I007","instruction":"Batalkan agenda meeting proyek besok","expected_action":"delete","category":"synonym"}
+{"id":"I008","instruction":"Aku tidak jadi ikut sesi olahraga besok, hapus jadwalnya","expected_action":"delete","category":"conversational"}
+{"id":"I009","instruction":"Tolong hilangkan jadwal membaca buku hari ini","expected_action":"delete","category":"synonym"}
+{"id":"I010","instruction":"Hapus kegiatan belajar algoritma","expected_action":"delete","category":"missing_date"}
+{"id":"I011","instruction":"Ubah durasi belajar Python menjadi 120 menit","expected_action":"update","category":"explicit"}
+{"id":"I012","instruction":"Jadwal membaca bukuku terlalu lama, ubah jadi 30 menit","expected_action":"update","category":"conversational"}
+{"id":"I013","instruction":"Ubah preferensi waktu belajar Python menjadi pagi","expected_action":"update","category":"explicit"}
+{"id":"I014","instruction":"Pendekkan sesi olahraga besok jadi 20 menit","expected_action":"update","category":"synonym"}
+{"id":"I015","instruction":"Durasi meeting proyek besok diganti jadi 90 menit","expected_action":"update","category":"conversational"}
+{"id":"I016","instruction":"Pindahkan meeting proyek ke besok sore","expected_action":"reschedule","category":"explicit"}
+{"id":"I017","instruction":"Geser jadwal belajar Python dari hari ini ke besok","expected_action":"reschedule","category":"synonym"}
+{"id":"I018","instruction":"Belajar algoritmanya pindah ke malam saja","expected_action":"reschedule","category":"conversational"}
+{"id":"I019","instruction":"Jangan sore, pindahkan olahraga ke pagi","expected_action":"reschedule","category":"conversational"}
+{"id":"I020","instruction":"Reschedule meeting proyek besok ke pagi hari","expected_action":"reschedule","category":"mixed_language"}
+{"id":"I021","instruction":"Bisa bantu atur jadwalku?","expected_action":"clarify","category":"ambiguous"}
+{"id":"I022","instruction":"Pindahkan jadwal itu","expected_action":"clarify","category":"missing_target"}
+{"id":"I023","instruction":"Aku ingin lebih produktif minggu ini","expected_action":"clarify","category":"general_request"}
+{"id":"I024","instruction":"Tolong jadwalkan sesuatu besok","expected_action":"clarify","category":"missing_task"}
+{"id":"I025","instruction":"Hapus yang kemarin itu","expected_action":"clarify","category":"missing_target"}

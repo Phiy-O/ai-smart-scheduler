@@ -1,0 +1,31 @@
+{
+  "model_configured": "qwen3:4b",
+  "total": 25,
+  "correct": 25,
+  "intent_accuracy": 1.0,
+  "execution_errors": 0,
+  "average_latency_seconds": 8.593,
+  "p95_latency_seconds": 10.564,
+  "by_action": {
+    "clarify": {
+      "total": 5,
+      "correct": 5
+    },
+    "create": {
+      "total": 5,
+      "correct": 5
+    },
+    "delete": {
+      "total": 5,
+      "correct": 5
+    },
+    "reschedule": {
+      "total": 5,
+      "correct": 5
+    },
+    "update": {
+      "total": 5,
+      "correct": 5
+    }
+  }
+}
