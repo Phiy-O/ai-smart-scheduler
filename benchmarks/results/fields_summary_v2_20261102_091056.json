@@ -1,0 +1,9 @@
+{
+  "total": 20,
+  "intent_accuracy": 1.0,
+  "exact_match_accuracy": 0.9,
+  "field_accuracy_given_correct_intent": 0.9722,
+  "supported_field_recall": 0.9821,
+  "unsupported_field_rate": 0.0175,
+  "execution_errors": 0
+}

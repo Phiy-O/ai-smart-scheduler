@@ -1,5 +1,6 @@
 
 from typing import Annotated, Literal, Union
+from extraction_prompts import EXTRACTION_PROMPT_V2
 
 from pydantic import (
     BaseModel,
@@ -240,8 +241,13 @@ Output hanya JSON sesuai schema.
 
 
 class CommandParser:
-    def __init__(self, provider=None):
+    def __init__(self, provider=None, extraction_prompt=None):
         self.provider = provider or OllamaProvider()
+        self.extraction_prompt = (
+            extraction_prompt
+            if extraction_prompt is not None
+            else EXTRACTION_PROMPT
+        )
 
     def _generate(self, system_prompt, instruction, model):
         raw = self.provider.generate(
@@ -273,7 +279,7 @@ class CommandParser:
         command_model = COMMAND_MODELS[intent.action]
 
         prompt = (
-            EXTRACTION_PROMPT
+            self.extraction_prompt
             + f"\nOperasi wajib: {intent.action}."
         )
 

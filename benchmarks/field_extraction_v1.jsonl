@@ -1,0 +1,21 @@
+
+{"id":"F001","instruction":"Tambahkan belajar Python besok pagi selama 90 menit","expected":{"action":"create","task_name":"belajar Python","date_reference":"tomorrow","duration_minutes":90,"preferred_period":"morning"}}
+{"id":"F002","instruction":"Besok sore aku ingin membaca buku selama satu jam","expected":{"action":"create","task_name":"membaca buku","date_reference":"tomorrow","duration_minutes":60,"preferred_period":"afternoon"}}
+{"id":"F003","instruction":"Buatkan jadwal olahraga hari ini selama 30 menit","expected":{"action":"create","task_name":"olahraga","date_reference":"today","duration_minutes":30,"preferred_period":null}}
+{"id":"F004","instruction":"Jadwalkan latihan SQL selama 45 menit besok malam","expected":{"action":"create","task_name":"latihan SQL","date_reference":"tomorrow","duration_minutes":45,"preferred_period":"evening"}}
+{"id":"F005","instruction":"Aku mau mengerjakan laporan praktikum besok selama dua jam","expected":{"action":"create","task_name":"mengerjakan laporan praktikum","date_reference":"tomorrow","duration_minutes":120,"preferred_period":null}}
+{"id":"F006","instruction":"Hapus jadwal belajar Python besok","expected":{"action":"delete","target":{"task_name":"belajar Python","date_reference":"tomorrow"}}}
+{"id":"F007","instruction":"Batalkan agenda meeting proyek hari ini","expected":{"action":"delete","target":{"task_name":"meeting proyek","date_reference":"today"}}}
+{"id":"F008","instruction":"Hilangkan kegiatan membaca buku dari jadwalku","expected":{"action":"delete","target":{"task_name":"membaca buku","date_reference":null}}}
+{"id":"F009","instruction":"Ubah durasi belajar Python besok menjadi 120 menit","expected":{"action":"update","target":{"task_name":"belajar Python","date_reference":"tomorrow"},"changes":{"duration_minutes":120,"preferred_period":null}}}
+{"id":"F010","instruction":"Perpendek sesi olahraga hari ini jadi 20 menit","expected":{"action":"update","target":{"task_name":"olahraga","date_reference":"today"},"changes":{"duration_minutes":20,"preferred_period":null}}}
+{"id":"F011","instruction":"Ubah preferensi belajar algoritma jadi pagi","expected":{"action":"update","target":{"task_name":"belajar algoritma","date_reference":null},"changes":{"duration_minutes":null,"preferred_period":"morning"}}}
+{"id":"F012","instruction":"Jadikan durasi review kode 75 menit","expected":{"action":"update","target":{"task_name":"review kode","date_reference":null},"changes":{"duration_minutes":75,"preferred_period":null}}}
+{"id":"F013","instruction":"Geser meeting proyek dari hari ini ke besok sore","expected":{"action":"reschedule","target":{"task_name":"meeting proyek","date_reference":"today"},"new_date_reference":"tomorrow","new_period":"afternoon"}}
+{"id":"F014","instruction":"Pindahkan belajar Python besok ke pagi hari","expected":{"action":"reschedule","target":{"task_name":"belajar Python","date_reference":"tomorrow"},"new_date_reference":null,"new_period":"morning"}}
+{"id":"F015","instruction":"Jadwal olahraga hari ini pindah ke besok","expected":{"action":"reschedule","target":{"task_name":"olahraga","date_reference":"today"},"new_date_reference":"tomorrow","new_period":null}}
+{"id":"F016","instruction":"Alihkan latihan SQL ke malam","expected":{"action":"reschedule","target":{"task_name":"latihan SQL","date_reference":null},"new_date_reference":null,"new_period":"evening"}}
+{"id":"F017","instruction":"Pindahkan membaca buku dari besok sore ke hari ini pagi","expected":{"action":"reschedule","target":{"task_name":"membaca buku","date_reference":"tomorrow"},"new_date_reference":"today","new_period":"morning"}}
+{"id":"F018","instruction":"Ubah durasi meeting besok jadi 60 menit dan prioritaskan sore","expected":{"action":"update","target":{"task_name":"meeting","date_reference":"tomorrow"},"changes":{"duration_minutes":60,"preferred_period":"afternoon"}}}
+{"id":"F019","instruction":"Hapus agenda latihan presentasi","expected":{"action":"delete","target":{"task_name":"latihan presentasi","date_reference":null}}}
+{"id":"F020","instruction":"Tambahkan latihan mengetik selama 25 menit","expected":{"action":"create","task_name":"latihan mengetik","date_reference":null,"duration_minutes":25,"preferred_period":null}}

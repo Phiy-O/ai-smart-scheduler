@@ -1,0 +1,33 @@
+{
+  "model_configured": "qwen3:4b",
+  "dataset": "intent_holdout_v1.jsonl",
+  "prompt_version": "v2",
+  "total": 30,
+  "correct": 29,
+  "intent_accuracy": 0.9667,
+  "execution_errors": 0,
+  "average_latency_seconds": 8.448,
+  "p95_latency_seconds": 11.287,
+  "by_action": {
+    "clarify": {
+      "total": 6,
+      "correct": 6
+    },
+    "create": {
+      "total": 6,
+      "correct": 6
+    },
+    "delete": {
+      "total": 6,
+      "correct": 5
+    },
+    "reschedule": {
+      "total": 6,
+      "correct": 6
+    },
+    "update": {
+      "total": 6,
+      "correct": 6
+    }
+  }
+}
