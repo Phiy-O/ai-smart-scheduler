@@ -24,6 +24,7 @@ class ModificationRequest:
     new_title: str | None = None
     new_date: date | None = None
     new_start_time: str | None = None
+    time_hint: str | None = None
     
     new_duration_minutes: int | None = None
     new_period: str | None = None

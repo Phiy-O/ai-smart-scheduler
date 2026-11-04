@@ -11,6 +11,8 @@ from schedule_repository import ScheduleRepository
 from approval_service import ApprovalService
 from ai_scheduler import AIScheduler
 from models import ScheduleProposalDB
+from ai_modification import AIModification
+from modification_approval_service import ModificationApprovalService
 
 from dataclasses import asdict
 from preferences_repository import PreferencesRepository
@@ -62,8 +64,18 @@ def create_app(
 
 
     engine = make_engine(db_url)
+    init_database(engine)
 
     preferences_repository = PreferencesRepository(engine)
+    
+    ai_modification = AIModification(
+        engine=engine,
+        parser=parser,
+    )
+
+    modification_approval_service = (
+        ai_modification.approval_service
+    )
 
     repository = ScheduleRepository(
         engine,
@@ -97,6 +109,10 @@ def create_app(
     app.state.repository = repository
     app.state.approval_service = approval_service
     app.state.ai_scheduler = ai_scheduler
+    app.state.ai_modification = ai_modification
+    app.state.modification_approval_service = (
+        modification_approval_service
+    )
 
     @app.get("/")
     def root():
@@ -361,7 +377,77 @@ def create_app(
             )
 
         return result
+    
+    @app.post("/ai/modifications")
+    def propose_modification(payload: AIInstruction):
+        try:
+            return ai_modification.process(
+                payload.instruction
+            )
+        except ValueError as exc:
+            raise HTTPException(
+                status_code=422,
+                detail=str(exc),
+            ) from exc
 
+    @app.post(
+        "/modification-proposals/{proposal_id}/approve"
+    )
+    def approve_modification(proposal_id: int):
+        result = modification_approval_service.approve(
+            proposal_id
+        )
+
+        status = result["status"]
+
+        if status == "not_found":
+            raise HTTPException(
+                status_code=404,
+                detail=result,
+            )
+
+        if status in {
+            "invalid_transition",
+            "expired",
+            "stale_preview",
+            "target_not_found",
+            "unsupported_action",
+            "conflict_or_invalid",
+            "invalid_proposal",
+        }:
+            raise HTTPException(
+                status_code=409,
+                detail=result,
+            )
+
+        return result
+
+    @app.post(
+        "/modification-proposals/{proposal_id}/reject"
+    )
+    def reject_modification(proposal_id: int):
+        result = modification_approval_service.reject(
+            proposal_id
+        )
+
+        status = result["status"]
+
+        if status == "not_found":
+            raise HTTPException(
+                status_code=404,
+                detail=result,
+            )
+
+        if status in {
+            "invalid_transition",
+            "expired",
+        }:
+            raise HTTPException(
+                status_code=409,
+                detail=result,
+            )
+
+        return result
 
     return app
 

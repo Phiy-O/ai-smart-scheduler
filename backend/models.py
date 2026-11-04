@@ -119,3 +119,41 @@ class UserPreferencesDB(Base):
     max_focus_minutes: Mapped[int] = mapped_column(
         Integer, nullable=False
     )
+
+
+class ModificationProposalDB(Base):
+    __tablename__ = "modification_proposals"
+
+    id: Mapped[int] = mapped_column(
+        Integer, primary_key=True
+    )
+
+    action: Mapped[str] = mapped_column(
+        String(20), nullable=False
+    )
+
+    target_event_id: Mapped[int] = mapped_column(
+        Integer, nullable=False
+    )
+
+    # Snapshot jadwal pada saat preview dibuat.
+    before_snapshot: Mapped[dict] = mapped_column(
+        JSON, nullable=False
+    )
+
+    status: Mapped[str] = mapped_column(
+        String(20), nullable=False, default="pending"
+    )
+
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=utc_now
+    )
+
+    expires_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False
+    )
+    
+    after_snapshot: Mapped[dict | None] = mapped_column(
+    JSON,
+    nullable=True,
+)

@@ -3,6 +3,7 @@ from datetime import date, timedelta
 
 from schedule_commands import CommandParser
 from evidence_validation import validate_evidence
+from semantic_evidence_gate import validate_semantic_evidence
 from schedule_repository import ScheduleRepository
 from scheduling_engine import (
     SchedulingEngine,
@@ -60,6 +61,23 @@ class AIScheduler:
                 "status": "evidence_rejected",
                 "issues": evidence.issues,
             }
+        
+    
+        semantic_evidence = validate_semantic_evidence(
+            instruction,
+            command,
+        )
+
+        if not semantic_evidence.can_proceed:
+            return {
+                "status": "evidence_rejected",
+                "issues": [
+                    f"{issue.field}: {issue.reason}"
+                    for issue in semantic_evidence.issues
+                ] or [
+                    "Instruksi membutuhkan klarifikasi"
+                ],
+            }    
 
         if command.duration_minutes is None:
             return {

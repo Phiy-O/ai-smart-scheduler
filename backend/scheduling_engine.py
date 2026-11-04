@@ -43,6 +43,7 @@ class ScheduleRequest:
     event_date: date
     duration_minutes: int
     preferred_period: str | None = None
+    time_hint: str | None = None
 
 
 @dataclass
@@ -140,6 +141,13 @@ class SchedulingEngine:
 
         start_day = to_minutes(prefs.day_start)
         end_day = to_minutes(prefs.day_end)
+
+        if request.time_hint == "sore":
+            start_day = max(start_day, 15 * 60)
+            end_day = min(end_day, 18 * 60)
+        elif request.time_hint == "siang":
+            start_day = max(start_day, 12 * 60)
+            end_day = min(end_day, 15 * 60)
 
         if end_day <= start_day:
             raise ValueError("Day end must follow day start")

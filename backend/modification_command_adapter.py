@@ -75,6 +75,7 @@ def adapt_modification_command(
             ),
         )
 
+
     if isinstance(command, UpdateCommand):
         duration = command.changes.duration_minutes
         period = command.changes.preferred_period
@@ -85,13 +86,32 @@ def adapt_modification_command(
                 reason="No update changes provided",
             )
 
+        # Event database belum memiliki field
+        # preferred_period yang dapat diubah langsung.
+        if period is not None:
+            return AdaptationResult(
+                status="requires_slot_selection",
+                reason=(
+                    "Period changes require slot selection"
+                ),
+            )
+
+        if duration is None or duration <= 0:
+            return AdaptationResult(
+                status="insufficient_evidence",
+                reason="Valid duration is required",
+            )
+
         return AdaptationResult(
-            status="unsupported_change",
-            reason=(
-                "Duration and preferred-period updates "
-                "need dedicated preview support"
+            status="ready",
+            request=ModificationRequest(
+                action=ModificationAction.UPDATE,
+                target_title=target_title,
+                target_date=target_date,
+                new_duration_minutes=duration,
             ),
         )
+
 
     if isinstance(command, RescheduleCommand):
         new_date = resolve_date_reference(
@@ -105,15 +125,6 @@ def adapt_modification_command(
                 reason="No reschedule destination provided",
             )
 
-        if command.new_period is not None:
-            return AdaptationResult(
-                status="requires_slot_selection",
-                reason=(
-                    "A target period requires scheduling-engine "
-                    "slot recommendations"
-                ),
-            )
-
         return AdaptationResult(
             status="ready",
             request=ModificationRequest(
@@ -121,5 +132,7 @@ def adapt_modification_command(
                 target_title=target_title,
                 target_date=target_date,
                 new_date=new_date,
+                new_period=command.new_period,
             ),
         )
+

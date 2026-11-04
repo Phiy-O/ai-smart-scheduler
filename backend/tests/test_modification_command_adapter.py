@@ -2,6 +2,7 @@
 from datetime import date
 import pytest
 from pydantic import ValidationError
+from modification_preview import ModificationAction
 
 from schedule_commands import (
     DeleteCommand,
@@ -79,7 +80,8 @@ def test_reschedule_to_new_date():
     assert result.request.new_date == date(2026, 10, 27)
 
 
-def test_reschedule_period_requires_slot_selection():
+
+def test_reschedule_period_creates_modification_request():
     command = RescheduleCommand.model_validate({
         "action": "reschedule",
         "target": {
@@ -90,11 +92,23 @@ def test_reschedule_period_requires_slot_selection():
 
     result = adapt_modification_command(command, TODAY)
 
-    assert result.status == "requires_slot_selection"
-    assert result.request is None
+    assert result.status == "ready"
+    assert result.request is not None
+
+    assert result.request.action == ModificationAction.RESCHEDULE
+    assert result.request.target_title == "Meeting Proyek"
+    assert result.request.target_date is None
+
+    # Periode diteruskan untuk diproses Scheduling Engine.
+    assert result.request.new_period == "afternoon"
+
+    # Tidak boleh mengarang tanggal atau jam tujuan.
+    assert result.request.new_date is None
+    assert result.request.new_start_time is None
 
 
-def test_update_duration_requires_preview_support():
+
+def test_update_duration_creates_modification_request():
     command = UpdateCommand.model_validate({
         "action": "update",
         "target": {
@@ -107,7 +121,13 @@ def test_update_duration_requires_preview_support():
 
     result = adapt_modification_command(command, TODAY)
 
-    assert result.status == "unsupported_change"
+    assert result.status == "ready"
+    assert result.request is not None
+
+    assert result.request.action == ModificationAction.UPDATE
+    assert result.request.target_title == "Belajar Python"
+    assert result.request.target_date is None
+    assert result.request.new_duration_minutes == 90
 
 
 def test_empty_update_is_rejected():
